@@ -1,12 +1,12 @@
 # Wiz Container Demo
 
-This demo used the podinfo web application, see detailed information below. The purpose of this repository is to easily demonstrate how the `WizCli` can be used in a CI pipeline, we are using GitHub actions here.
+This demo used the podinfo web application, see detailed information below. The purpose of this repository is to easily demonstrate how the `wizcli` can be used in a CI pipeline, we are using GitHub actions here.
 
 Demo Steps:
 
 * Create a new release in this repository using the CLI or UI
 * Go to Actions and review the CI process
-* Show the output of `WizCLI`
+* Show the output of `wizcli`
 * Clean up - delete the release created and associated tag
 
 
