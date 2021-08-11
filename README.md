@@ -4,7 +4,7 @@ This demo used the podinfo web application, see detailed information below. The 
 
 Demo Steps:
 
-* Create a new release in this repousing the CLI or UI
+* Create a new release in this repository using the CLI or UI
 * Go to Actions and review the CI process
 * Show the output of `WizCLI`
 * Clean up - delete the release created and associated tag
