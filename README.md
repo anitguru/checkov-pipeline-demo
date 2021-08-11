@@ -1,3 +1,16 @@
+# Wiz Container Demo
+
+This demo used the podinfo web application, see detailed information below. The purpose of this repository is to easily demonstrate how the `WizCli` can be used in a CI pipeline, we are using GitHub actions here.
+
+Demo Steps:
+
+* Create a new release in this repousing the CLI or UI
+* Go to Actions and review the CI process
+* Show the output of `WizCLI`
+* Clean up - delete the release created and associated tag
+
+
+
 # podinfo
 
 [![e2e](https://github.com/stefanprodan/podinfo/workflows/e2e/badge.svg)](https://github.com/stefanprodan/podinfo/blob/master/.github/workflows/e2e.yml)
