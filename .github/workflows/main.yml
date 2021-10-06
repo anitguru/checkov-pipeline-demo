@@ -1,9 +1,10 @@
 name: Build, Scan and push Docker image upon release
 
-on:
-  # Build and push Docker images *only* for releases.
-  release:
-    types: [published] # , created, edited
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build_push_deploy:
