@@ -30,7 +30,7 @@ jobs:
 
       - name: Build an image from Dockerfile
         run: |
-          docker build -t docker.io/devopslifter/podinfo:${{ steps.get_version.outputs.VERSION }} .
+          docker build -t docker.io/devopslifter/podinfo:1.0 .
           
       - name: Install Wiz CLI
         run: |
@@ -53,5 +53,5 @@ jobs:
         
       - name: Push an image to Docker Hub
         run: |
-          docker push docker.io/devopslifter/podinfo:${{ steps.get_version.outputs.VERSION }}
+          docker push docker.io/devopslifter/podinfo:1.0
 
