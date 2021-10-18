@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+</Project>
+
+
+kubectl create secret generic git-https-credentials --from-literal=username=devopslifter --from-literal=password=Apc6%Jqr2!?
