@@ -1,43 +1,13 @@
-FROM golang:1.16-alpine as builder
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+WORKDIR /app
 
-ARG REVISION
+COPY src/*.csproj ./
+RUN dotnet restore
 
-RUN mkdir -p /podinfo/
+COPY src ./
+RUN dotnet publish -c Release -o out
 
-WORKDIR /podinfo
-
-COPY . .
-
-RUN go mod download
-
-RUN CGO_ENABLED=0 go build -ldflags "-s -w \
-    -X github.com/stefanprodan/podinfo/pkg/version.REVISION=${REVISION}" \
-    -a -o bin/podinfo cmd/podinfo/*
-
-RUN CGO_ENABLED=0 go build -ldflags "-s -w \
-    -X github.com/stefanprodan/podinfo/pkg/version.REVISION=${REVISION}" \
-    -a -o bin/podcli cmd/podcli/*
-
-FROM alpine:3.13
-
-ARG BUILD_DATE
-ARG VERSION
-ARG REVISION
-
-LABEL maintainer="stefanprodan"
-
-RUN addgroup -S app \
-    && adduser -S -G app app \
-    && apk --no-cache add \
-    ca-certificates curl netcat-openbsd
-
-WORKDIR /home/app
-
-COPY --from=builder /podinfo/bin/podinfo .
-COPY --from=builder /podinfo/bin/podcli /usr/local/bin/podcli
-COPY ./ui ./ui
-RUN chown -R app:app ./
-
-USER app
-
-CMD ["./podinfo"]
+FROM mcr.microsoft.com/dotnet/aspnet:3.1-alpine
+WORKDIR /app
+COPY --from=build-env /app/out .
+ENTRYPOINT ["dotnet", "NetCore.Docker.dll"]
