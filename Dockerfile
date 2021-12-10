@@ -1,1 +1,1 @@
-FROM nginx:latest
+FROM node:14
