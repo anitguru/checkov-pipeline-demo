@@ -30,7 +30,7 @@ jobs:
 
       - name: Build an image from Dockerfile
         run: |
-          docker build -t docker.io/devopslifter/podinfo:1.0 .
+          docker build -t docker.io/devopslifter/wizdemo:1.0 .
           
       - name: Install Wiz CLI
         run: |
@@ -43,7 +43,7 @@ jobs:
          
       - name: Scan Docker Image
         run: |
-         WIZ_ENV=TEST ./wizcli docker scan --image docker.io/devopslifter/podinfo:1.0 -p Sree-Vuln-Policy --policy-hits-only
+         WIZ_ENV=TEST ./wizcli docker scan --image docker.io/devopslifter/wizdemo:1.0 -p Sree-Vuln-Policy --policy-hits-only
 
         
       - name: Login to Docker Hub
