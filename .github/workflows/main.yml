@@ -43,7 +43,7 @@ jobs:
          
       - name: Scan Docker Image
         run: |
-         WIZ_ENV=TEST ./wizcli docker scan --image docker.io/devopslifter/podinfo:1.0 -p Sree-Vuln-Policy
+         WIZ_ENV=TEST ./wizcli docker scan --image docker.io/devopslifter/podinfo:1.0 -p Sree-Vuln-Policy --policy-hits-only
 
         
       - name: Login to Docker Hub
