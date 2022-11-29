@@ -26,11 +26,11 @@ jobs:
          
       - name: Authenticate to the Wiz API
         run: |
-         WIZ_ENV=DEMO ./wizcli auth --id ${{ secrets.WIZ_CLIENT_ID }} --secret ${{ secrets.WIZ_CLIENT_SECRET }}
+         WIZ_ENV=CSAPROD ./wizcli auth --id ${{ secrets.WIZ_CLIENT_ID }} --secret ${{ secrets.WIZ_CLIENT_SECRET }}
          
       - name: Scan Docker Image
         run: |
-         WIZ_ENV=DEMO ./wizcli docker scan --image docker.io/devopslifter/wizdemo:1.0 -p acme --policy-hits-only
+         WIZ_ENV=CSAPROD ./wizcli docker scan --image docker.io/devopslifter/wizdemo:1.0 -p acme --policy-hits-only
 
         
       - name: Login to Docker Hub
