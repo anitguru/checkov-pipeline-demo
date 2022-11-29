@@ -30,7 +30,7 @@ jobs:
          
       - name: Scan Docker Image
         run: |
-         ./wizcli docker scan --image docker.io/devopslifter/wizdemo:1.0 -p acme --policy-hits-only
+         ./wizcli docker scan --image docker.io/pbgess10/wizdemo:1.0 -p acme --policy-hits-only
 
         
       - name: Login to Docker Hub
