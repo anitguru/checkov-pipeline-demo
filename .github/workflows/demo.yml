@@ -41,5 +41,5 @@ jobs:
         
       - name: Push an image to Docker Hub
         run: |
-          docker push docker.io/pbgess10/wizdemo:1.0
+          docker push docker.io/pbgess10/wizdemo:1.0 
 
