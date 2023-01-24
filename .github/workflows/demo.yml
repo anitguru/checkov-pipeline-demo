@@ -42,4 +42,6 @@ jobs:
       - name: Push an image to Docker Hub
         run: |
           docker push docker.io/svagml10/wizdemo:1.0
+          
+          
 
