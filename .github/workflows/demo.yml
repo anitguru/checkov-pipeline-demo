@@ -17,7 +17,7 @@ jobs:
 
       - name: Build an image from Dockerfile
         run: |
-          docker build -t docker.io/pbgess10/wizdemo:1.0 .
+          docker build -t docker.io/svagml/wizdemo:1.0 .
           
       - name: Install Wiz CLI
         run: |
@@ -30,7 +30,7 @@ jobs:
          
       - name: Scan Docker Image
         run: |
-         ./wizcli docker scan --image docker.io/pbgess10/wizdemo:1.0 -p pgess-gh-actions --policy-hits-only
+         ./wizcli docker scan --image docker.io/svagml10/wizdemo:1.0 -p svagml-gh-actions --policy-hits-only
 
         
       - name: Login to Docker Hub
@@ -41,5 +41,5 @@ jobs:
         
       - name: Push an image to Docker Hub
         run: |
-          docker push docker.io/pbgess10/wizdemo:1.0
+          docker push docker.io/svagml10/wizdemo:1.0
 
