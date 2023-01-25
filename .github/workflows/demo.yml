@@ -30,7 +30,7 @@ jobs:
          
       - name: Scan Docker Image
         run: |
-         ./wizcli docker scan --image docker.io/svagml10/wizdemo:1.0 -p svagml-gh-actions --policy-hits-only
+         ./wizcli docker scan --image docker.io/svagml10/wizdemo:1.0 -p steve-gh-actions --policy-hits-only
 
         
       - name: Login to Docker Hub
