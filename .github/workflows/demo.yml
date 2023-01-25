@@ -44,5 +44,3 @@ jobs:
           docker push docker.io/svagml10/wizdemo:1.0
           
           
-
-
