@@ -43,6 +43,3 @@ jobs:
         run: |
           docker push docker.io/svagml/wizdemo:1.0
           
-          
-          
-
