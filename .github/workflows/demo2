@@ -1,0 +1,43 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ] 
+  pull_request:
+    branches: [ master ]
+    
+  workflow_dispatch:
+
+jobs:
+  build_push_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build an image from Dockerfile
+        run: |
+          docker build -t docker.io/svagml/wizdemo:1.0 .
+          
+      - name: Install Wiz CLI
+        run: |
+         curl -o wizcli https://wizcli.app.wiz.io/wizcli
+         chmod +x wizcli
+         
+      - name: Authenticate to the Wiz API
+        run: |
+         ./wizcli auth --id ${{ secrets.WIZ_CLIENT_ID }} --secret ${{ secrets.WIZ_CLIENT_SECRET }}
+         
+      - name: Scan Docker Image
+        run: |
+         ./wizcli docker scan --image docker.io/svagml/wizdemo:1.0 -p steve-gh-actions --policy-hits-only
+        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        
+      - name: Push an image to Docker Hub
+        run: |
+          docker push docker.io/svagml/wizdemo:1.0
