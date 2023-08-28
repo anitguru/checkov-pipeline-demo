@@ -32,7 +32,7 @@ jobs:
 
       - name: Install Trivy
         run: |
-          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v${{ env.TRIVY_VERSION }}
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.44.1
 
       - name: Test
         run: BATS_LIB_PATH=${{ env.BATS_LIB_PATH }} bats --recursive --timing .
@@ -47,8 +47,3 @@ jobs:
       - name: Push an image to Docker Hub
         run: |
           docker push docker.io/svagml/trivydemo:1.0
-          
-          
-          
-          
-          
