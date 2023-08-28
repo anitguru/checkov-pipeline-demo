@@ -11,7 +11,6 @@ on:
 jobs:
   build_push_deploy:
     runs-on: ubuntu-20.04
-    permissions: write-all
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
