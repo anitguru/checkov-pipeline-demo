@@ -10,27 +10,32 @@ on:
 
 jobs:
   build_push_deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Build an image from Dockerfile
         run: |
-          docker build -t docker.io/svagml/wizdemo:1.0 .
+          docker build -t docker.io/svagml/trivydemo:1.0 .
           
-      - name: Install Wiz CLI
+      - name: Setup BATS
+        uses: mig4/setup-bats@v1
+        with:
+          bats-version: 1.7.0
+
+      - name: Setup Bats libs
+        uses: brokenpip3/setup-bats-libs@0.1.0
+
+      - name: Check out code
+        uses: actions/checkout@v1
+
+      - name: Install Trivy
         run: |
-         curl -o wizcli https://wizcli.app.wiz.io/wizcli
-         chmod +x wizcli
-         
-      - name: Authenticate to the Wiz API
-        run: |
-         ./wizcli auth --id ${{ secrets.WIZ_CLIENT_ID }} --secret ${{ secrets.WIZ_CLIENT_SECRET }}
-         
-      - name: Scan Docker Image
-        run: |
-         ./wizcli docker scan --image docker.io/svagml/wizdemo:1.0 -p steve-gh-actions --policy-hits-only
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v${{ env.TRIVY_VERSION }}
+
+      - name: Test
+        run: BATS_LIB_PATH=${{ env.BATS_LIB_PATH }} bats --recursive --timing .
 
         
       - name: Login to Docker Hub
@@ -41,7 +46,7 @@ jobs:
         
       - name: Push an image to Docker Hub
         run: |
-          docker push docker.io/svagml/wizdemo:1.0
+          docker push docker.io/svagml/trivydemo:1.0
           
           
           
