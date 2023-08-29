@@ -5,7 +5,7 @@ The purpose of this repository is to easily demonstrate how `trivy` can be used 
 
 ## Setup:
 * Create Action Secrets for `DOCKER_HUB_ACCESS_TOKEN` and `DOCKER_HUB_USERNAME`
-* Update `/Users/tomfinch/github/wiz-container-demo/.github/workflows/main.yml` to reflect your dockerhub user.
+
 
 ## Demo Steps:
 
