@@ -11,5 +11,5 @@ The purpose of this repository is to easily demonstrate how `trivy` can be used 
 
 * Create a new release in this repository using the CLI or UI or trigger a build manually
 * Go to Actions and review the CI process
-* Show the output of `tTrivy`
+* Show the output of `Trivy`
 * Clean up - delete the release created and associated tags if used
