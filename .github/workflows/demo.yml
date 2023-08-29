@@ -15,7 +15,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Build an image from Dockerfile
+      - name: Build & scan an image from Dockerfile (fail if vuln criteria is met)
         run: |
           docker build -t docker.io/svagml/trivydemo:1.0 .
         
