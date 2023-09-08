@@ -17,4 +17,4 @@ The purpose of this repository is to easily demonstrate how `trivy` can be used 
 
 ## Reference: https://www.aquasec.com/products/trivy/
 
-Trivy can be added at different phases of a build.  Currently configured, it's within the Dockerfile to stop a build if doesn't meet scanning security requirements.  Alternatively, it can scan after the Docker image is created and its telemetry published to the Github Security tab.
+Trivy can be added at different phases of a build.  Currently configured, it's within the Dockerfile to stop a build if doesn't meet scanning security requirements.  Alternatively, it can scan after the Docker image is created and its telemetry published to the Github Security tab _(https://github.com/anitguru/trivy-container-demo/security/code-scanning)_.
