@@ -1,10 +1,10 @@
 # Use a base image
-FROM python:3.8
+FROM debian:9.5-slim
 
 # Install Checkov using pip
-RUN pip install checkov
+#RUN pip install checkov
 
 # Set the entry point to Checkov
 #ENTRYPOINT ["checkov"]
 
-RUN ls -lrt /github/workspace
+ENTRYPOINT ["echo $GITHUB_SHA"]
