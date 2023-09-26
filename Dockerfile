@@ -1,6 +1,6 @@
 #FROM vulnerables/web-dvwa
-#FROM alpine:3.7 as build
-FROM alpine:latest as build
+FROM alpine:3.7 as build
+#FROM alpine:latest as build
 
 # Run vulnerability scan on build image and fail the build if vulns are discovered
 FROM build AS vulnscan
