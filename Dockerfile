@@ -7,4 +7,4 @@ RUN pip install checkov
 # Set the entry point to Checkov
 #ENTRYPOINT ["checkov"]
 
-RUN cat /github/workspace/README.md
+RUN ls -lrt /github/workspace
