@@ -7,4 +7,7 @@ FROM debian:9.5-slim
 # Set the entry point to Checkov
 #ENTRYPOINT ["checkov"]
 
-ENTRYPOINT ["echo $GITHUB_SHA"]
+COPY iac_files /iac_files
+CMD ls -lrt /iac_files
+
+#ENTRYPOINT ["echo $GITHUB_SHA"]
