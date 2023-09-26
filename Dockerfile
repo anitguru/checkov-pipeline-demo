@@ -8,6 +8,6 @@ FROM debian:9.5-slim
 #ENTRYPOINT ["checkov"]
 
 COPY iac_files /iac_files
-CMD ls -lrt /iac_files
+RUN ls -lrt /iac_files
 
 #ENTRYPOINT ["echo $GITHUB_SHA"]
