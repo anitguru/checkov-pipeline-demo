@@ -19,7 +19,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
             image: bridgecrew/checkov:latest
-            options: -v ${{ github.workspace }}Dockerfile:Dockerfile
+            options: -v ${{ github.workspace }}/Dockerfile:Dockerfile
             run: |
                 checkov -d . --framework dockerfile
 
