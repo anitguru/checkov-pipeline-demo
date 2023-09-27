@@ -15,7 +15,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Build & scan an image from Dockerfile (fail if vuln criteria is met)
+      - name: Scan the Dockerfile (fail if vuln criteria is met)
+        uses: addnab/docker-run-action@v3
+        with:
+            image: bridgecrew/checkov:latest
+            options: -v ${{ github.workspace }}Dockerfile:Dockerfile
+            run: |
+                checkov -d . --framework dockerfile
+
+      - name: Build an image from the Dockerfile
         run: |
           docker build -t docker.io/svagml/checkovdemo:1.0 .
         
