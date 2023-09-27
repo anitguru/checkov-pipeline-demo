@@ -24,7 +24,7 @@ jobs:
                 checkov -d . --framework dockerfile --soft-fail -o cli -o sarif --output-file-path console,checkov-results.sarif
                 
       - name: Checking for checkov-results.sarif
-      - run: | 
+        run: | 
           cat checkov-results.sarif
 
       - name: Upload checkov scan results to GitHub Security tab
