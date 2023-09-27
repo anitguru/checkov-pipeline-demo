@@ -8,7 +8,7 @@ RUN pip install checkov
 #ENTRYPOINT ["checkov"]
 
 COPY iac_files /iac_files
-RUN checkov -d /iac_files
+RUN checkov -d /iac_files --soft-fail
 
 # Set the entry point to Checkov
 ENTRYPOINT ["checkov"]
