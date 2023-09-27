@@ -30,15 +30,13 @@ jobs:
             image: bridgecrew/checkov:latest
             options: |
               -v ${{ github.workspace }}/Dockerfile:/Dockerfile
-              -v ${{ github.workspace }}/checkov-results.sarif:/checkov-results.sarif
+              -v ${{ github.workspace }}/results.sarif:/results.sarif
             run: |
-                checkov -d . --framework dockerfile --soft-fail -o cli -o sarif --output-file-path console,checkov-results.sarif
+                checkov -d . --framework dockerfile --soft-fail -o cli -o sarif
                 echo "Working DIR:"
-                echo
                 pwd
                 echo
                 echo "list files & dirs starting from root location:"
-                echo
                 ls -lrt /
                 
       - name: Upload checkov scan results to GitHub Security tab
