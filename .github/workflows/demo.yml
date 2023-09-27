@@ -31,15 +31,17 @@ jobs:
             options: |
               -v ${{ github.workspace }}/Dockerfile:/Dockerfile
               -v ${{ github.workspace }}/results_sarif.sarif:/results_sarif.sarif
-            run: |
-                checkov -d . --framework dockerfile --soft-fail -o sarif -output-file-path .
-                echo "Working DIR:"
-                pwd
-                echo
-                echo "list files & dirs starting from root location:"
-                ls -lrt /
-                echo "list files & dirs starting from /output location:"
-                ls -lrt /output
+              -w ${{ github.workspace }}
+              -d . --framework dockerfile --soft-fail -o sarif -output-file-path .
+            #run: |
+            #    checkov -d . --framework dockerfile --soft-fail -o sarif -output-file-path .
+            #    echo "Working DIR:"
+            #    pwd
+            #    echo
+            #    echo "list files & dirs starting from root location:"
+            #    ls -lrt /
+            #    echo "list files & dirs starting from /output location:"
+            #    ls -lrt /output
                 
       - name: Upload checkov scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
