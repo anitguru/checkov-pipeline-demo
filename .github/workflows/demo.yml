@@ -27,7 +27,7 @@ jobs:
                 
       - name: Checking for checkov-results.sarif
         run: |
-          ls -lrt / && ls -lrt /work
+          ls -lrt / && ls -lrt /home/runner
           cat /work/results.sarif
 
       - name: Upload checkov scan results to GitHub Security tab
