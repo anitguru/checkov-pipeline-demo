@@ -21,11 +21,11 @@ jobs:
             image: bridgecrew/checkov:latest
             options: -v ${{ github.workspace }}/Dockerfile:/Dockerfile
             run: |
-                checkov -d . --framework dockerfile --soft-fail -o cli -o sarif --output-file-path console,checkov-results.sarif
+                checkov -d . --framework dockerfile --soft-fail -o cli -o sarif
                 
       - name: Checking for checkov-results.sarif
         run: | 
-          cat checkov-results.sarif
+          cat results.sarif
 
       - name: Upload checkov scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
