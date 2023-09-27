@@ -5,21 +5,25 @@ on:
     branches: [ master ] 
   pull_request:
     branches: [ master ]
+env:
+  CONTAINER_VERSION: 0.45.0
     
-  workflow_dispatch:
+workflow_dispatch: repeat
 
 jobs:
   build_push_deploy:
     runs-on: ubuntu-20.04
     steps:
-      - name: Checkout repository
+      - name: Checkout repository # Required to mount the Github Workspace to a volume
         uses: actions/checkout@v2
 
       - name: Scan the Dockerfile (fail if vuln criteria is met)
         uses: addnab/docker-run-action@v3
         with:
             image: bridgecrew/checkov:latest
-            options: -v ${{ github.workspace }}/Dockerfile:/Dockerfile
+            options: |
+              -v ${{ github.workspace }}/Dockerfile:/Dockerfile
+              -v ${{ github.workspace }}:/work
             run: |
                 checkov -d . --framework dockerfile --soft-fail -o cli -o sarif
                 
@@ -34,7 +38,7 @@ jobs:
 
       - name: Build an image from the Dockerfile
         run: |
-          docker build -t docker.io/svagml/checkovdemo:1.0 .
+          docker build -t docker.io/svagml/checkovdemo:{{ env.CONTAINER_VERSION }} .
         
       - name: Login to Docker Hub
         uses: docker/login-action@v1
