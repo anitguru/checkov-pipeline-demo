@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ master ]
 env:
-  CONTAINER_VERSION: 0.45.0
+  CONTAINER_VERSION: 1.1
     
 jobs:
   build_push_deploy:
@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Checking for checkov-results.sarif
         run: |
-          ls -lrt / && ls -lrt /home/runner/work
+          ls -lrt / && ls -lrt /home/runner/work/checkov-pipeline-demo
           cat /work/results.sarif
           
       - name: Checkout repository # Required to mount the Github Workspace to a volume
@@ -28,10 +28,8 @@ jobs:
               -v ${{ github.workspace }}/Dockerfile:/Dockerfile
               -v ${{ github.workspace }}:/work
             run: |
-                checkov -d . --framework dockerfile --soft-fail -o cli -o sarif --output-file-path console,/work/results.sarif
+                checkov -d . --framework dockerfile --soft-fail -o cli -o sarif --output-file-path console,/home/runner/work/checkov-pipeline-demo/results.sarif
                 
-
-
       - name: Upload checkov scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
