@@ -30,26 +30,34 @@ jobs:
             image: bridgecrew/checkov:latest
             options: |
               -v ${{ github.workspace }}/Dockerfile:/Dockerfile
-              -v ${{ github.workspace }}/results.sarif:/results.sarif
-              -v ${{ github.workspace }}/results_sarif.sarif:/results_sarif.sarif
-              -w ${{ github.workspace }}
+              #-v ${{ github.workspace }}/results.sarif:/results.sarif
+              #-v ${{ github.workspace }}/results_sarif.sarif:/results_sarif.sarif
+              -w /
             run: |
               sh -c "checkov -d . --framework dockerfile --soft-fail -o sarif"
               echo "Working DIR:"
               pwd
               echo
+              echo "test" > bob.sarif
               echo "list files & dirs starting from root location:"
               ls -lrt /
-              ls -lrt /home/runner/work/checkov-pipeline-demo/checkov-pipeline-demo
               echo "cat files"
-              cat /home/runner/work/checkov-pipeline-demo/checkov-pipeline-demo/results.sarif
-              #cat results.sarif
-              #cat results_sarif.sarif
+              cat *.sarif
+
+      - name: Checking for files
+        run: |
+          echo "Working DIR:"
+          echo
+          pwd
+          ls -lrt /home/runner/work/checkov-pipeline-demo/checkov-pipeline-demo
+          ls -lrt /
+          echo
+          #cat /work/results.sarif
                 
       - name: Upload checkov scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: '/home/runner/work/checkov-pipeline-demo/checkov-pipeline-demo/results.sarif'
+          sarif_file: '/results.sarif'
 
       - name: Build an image from the Dockerfile
         run: |
