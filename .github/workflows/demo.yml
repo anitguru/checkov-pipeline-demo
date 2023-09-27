@@ -44,7 +44,7 @@ jobs:
       - name: Upload checkov scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: '/output/checkov-results.sarif'
+          sarif_file: '/output/results_sarif.sarif'
 
       - name: Build an image from the Dockerfile
         run: |
