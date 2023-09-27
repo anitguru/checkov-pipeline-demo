@@ -12,6 +12,11 @@ jobs:
   build_push_deploy:
     runs-on: ubuntu-20.04
     steps:
+      - name: Checking for checkov-results.sarif
+        run: |
+          ls -lrt / && ls -lrt /home/runner/work
+          cat /work/results.sarif
+          
       - name: Checkout repository # Required to mount the Github Workspace to a volume
         uses: actions/checkout@v2
 
@@ -25,10 +30,7 @@ jobs:
             run: |
                 checkov -d . --framework dockerfile --soft-fail -o cli -o sarif --output-file-path console,/work/results.sarif
                 
-      - name: Checking for checkov-results.sarif
-        run: |
-          ls -lrt / && ls -lrt /home/runner
-          cat /work/results.sarif
+
 
       - name: Upload checkov scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
