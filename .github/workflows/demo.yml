@@ -40,6 +40,7 @@ jobs:
               echo
               echo "list files & dirs starting from root location:"
               ls -lrt /
+              ls -lrt /home/runner/work/checkov-pipeline-demo/checkov-pipeline-demo
               echo "cat files"
               cat /home/runner/work/checkov-pipeline-demo/checkov-pipeline-demo/results.sarif
               #cat results.sarif
