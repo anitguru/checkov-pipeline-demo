@@ -23,11 +23,12 @@ jobs:
               -v ${{ github.workspace }}/Dockerfile:/Dockerfile
               -v ${{ github.workspace }}:/work
             run: |
-                checkov -d . --framework dockerfile --soft-fail -o cli -o sarif
+                checkov -d . --framework dockerfile --soft-fail -o cli -o sarif --output-file-path console,/work/results.sarif
                 
       - name: Checking for checkov-results.sarif
-        run: | 
-          cat /github/workspace/work/results.sarif
+        run: |
+          ls -lrt / && ls -lrt /work
+          cat /work/results.sarif
 
       - name: Upload checkov scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
