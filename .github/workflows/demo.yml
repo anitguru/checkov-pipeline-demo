@@ -27,7 +27,7 @@ jobs:
                 
       - name: Checking for checkov-results.sarif
         run: | 
-          cat results.sarif
+          cat /github/workspace/results.sarif
 
       - name: Upload checkov scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
