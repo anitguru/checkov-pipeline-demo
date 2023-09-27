@@ -32,9 +32,8 @@ jobs:
               -v ${{ github.workspace }}/Dockerfile:/Dockerfile
               -v ${{ github.workspace }}/results_sarif.sarif:/results_sarif.sarif
               -w ${{ github.workspace }}
-              #-d . --framework dockerfile --soft-fail -o sarif -output-file-path .
             run: |
-              bash -c "checkov -d . --framework dockerfile --soft-fail -o sarif --output-file-path ."
+              sh -c "checkov -d . --framework dockerfile --soft-fail -o sarif --output-file-path ."
             #    echo "Working DIR:"
             #    pwd
             #    echo
