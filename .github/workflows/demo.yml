@@ -30,7 +30,7 @@ jobs:
             image: bridgecrew/checkov:latest
             options: |
               -v ${{ github.workspace }}/Dockerfile:/Dockerfile
-              -v ${{ github.workspace }}/results_sarif.sarif:/results_sarif.sarif
+              -v ${{ github.workspace }}/results_sarif.sarif/results_sarif.sarif:/results_sarif.sarif/results_sarif.sarif
               -w ${{ github.workspace }}
             run: |
               sh -c "checkov -d . --framework dockerfile --soft-fail -o sarif"
@@ -43,7 +43,7 @@ jobs:
       - name: Upload checkov scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: 'results_sarif.sarif'
+          sarif_file: 'results_sarif.sarif/results_sarif.sarif'
 
       - name: Build an image from the Dockerfile
         run: |
