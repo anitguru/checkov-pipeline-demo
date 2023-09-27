@@ -40,8 +40,9 @@ jobs:
               echo
               echo "list files & dirs starting from root location:"
               ls -lrt /
-              cat /results.sarif
-              cat /results_sarif.sarif
+              echo "cat files"
+              cat results.sarif
+              cat results_sarif.sarif
                 
       - name: Upload checkov scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
