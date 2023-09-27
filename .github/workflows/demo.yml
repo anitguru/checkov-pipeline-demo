@@ -8,8 +8,6 @@ on:
 env:
   CONTAINER_VERSION: 0.45.0
     
-workflow_dispatch: repeat
-
 jobs:
   build_push_deploy:
     runs-on: ubuntu-20.04
