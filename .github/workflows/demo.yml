@@ -21,7 +21,7 @@ jobs:
             image: bridgecrew/checkov:latest
             options: -v ${{ github.workspace }}/Dockerfile:/Dockerfile
             run: |
-                checkov -d . --framework dockerfile --soft-fail
+                checkov -d . --framework dockerfile --soft-fail -o cli -o sarif --output-file-path console,checkov-results.sarif
 
       - name: Build an image from the Dockerfile
         run: |
