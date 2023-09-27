@@ -1,12 +1,7 @@
-# Reference: https://www.checkov.io/7.Scan%20Examples/Dockerfile.html
-FROM node:alpine
+# checkov reference: https://www.checkov.io/7.Scan%20Examples/Dockerfile.html
+# httpd reference: https://www.docker.com/blog/how-to-use-the-apache-httpd-docker-official-image/
+FROM httpd:2.4
 LABEL maintainer="Steve VanAllen <steve@vanallen.family>"
 LABEL description="This example Dockerfile installs node."
 MAINTAINER Steve VanAllen <steve@vanallen.family>
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
-COPY . .
-EXPOSE 3000 22
-HEALTHCHECK CMD curl --fail http://localhost:3000 || exit 1
-CMD ["node","app.js"]
+COPY ./public-html/ /usr/local/apache2/htdocs/
