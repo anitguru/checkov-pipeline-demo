@@ -11,4 +11,4 @@ COPY iac_files /iac_files
 RUN checkov -d ${{ vars.IAC_FILES_PATH_PREFIX }}iac_files --soft-fail
 
 # Set the entry point to Checkov
-ENTRYPOINT ["checkov"]
+#ENTRYPOINT ["checkov"]
