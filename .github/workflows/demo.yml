@@ -14,7 +14,10 @@ jobs:
     steps:
       - name: Checking for checkov-results.sarif
         run: |
-          echo "Working DIR:" && echo && ls -lrt /home/runner/work/checkov-pipeline-demo/checkov-pipeline-demo
+          echo "Working DIR:"
+          echo
+          pwd
+          ls -lrt /home/runner/work/checkov-pipeline-demo/checkov-pipeline-demo
           #cat /work/results.sarif
           
       - name: Checkout repository # Required to mount the Github Workspace to a volume
