@@ -12,15 +12,6 @@ jobs:
   build_push_deploy:
     runs-on: ubuntu-20.04
     steps:
-      - name: Checking for checkov-results.sarif
-        run: |
-          echo "Working DIR:"
-          echo
-          pwd
-          ls -lrt /home/runner/work/checkov-pipeline-demo/checkov-pipeline-demo
-          echo
-          #cat /work/results.sarif
-          
       - name: Checkout repository # Required to mount the Github Workspace to a volume
         uses: actions/checkout@v2
 
@@ -31,14 +22,14 @@ jobs:
             options: |
               -v ${{ github.workspace }}/Dockerfile:/Dockerfile
             run: |
-              sh -c "checkov -d . --framework dockerfile --soft-fail -o sarif --output-file-path /github/workspace"
+              sh -c "checkov -d . --framework dockerfile --soft-fail -o sarif"
               echo "Working DIR:"
               pwd
               echo
               echo "test" > bob.sarif
               echo "list files & dirs starting from root location:"
               ls -lrt /
-              echo "cat files"
+              echo "Cat files:"
               cat *.sarif
 
       - name: Checking for files
@@ -54,7 +45,7 @@ jobs:
       - name: Upload checkov scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: '/results.sarif'
+          sarif_file: 'results.sarif'
 
       - name: Build an image from the Dockerfile
         run: |
