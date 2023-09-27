@@ -30,9 +30,9 @@ jobs:
             image: bridgecrew/checkov:latest
             options: |
               -v ${{ github.workspace }}/Dockerfile:/Dockerfile
-              -v ${{ github.workspace }}/results.sarif:/results.sarif
+              -v ${{ github.workspace }}/results.sarif:/results_sarif.sarif
             run: |
-                checkov -d . --framework dockerfile --soft-fail -o cli -o sarif
+                checkov -d . --framework dockerfile --soft-fail -o sarif /
                 echo "Working DIR:"
                 pwd
                 echo
