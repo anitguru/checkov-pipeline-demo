@@ -18,6 +18,7 @@ jobs:
           echo
           pwd
           ls -lrt /home/runner/work/checkov-pipeline-demo/checkov-pipeline-demo
+          echo
           #cat /work/results.sarif
           
       - name: Checkout repository # Required to mount the Github Workspace to a volume
@@ -32,8 +33,13 @@ jobs:
               -v ${{ github.workspace }}/checkov-results.sarif:/checkov-results.sarif
             run: |
                 checkov -d . --framework dockerfile --soft-fail -o cli -o sarif --output-file-path console,/checkov-results.sarif
-                echo "pwd:" && echo && pwd
-                echo "list dirs from root location" && echo && ls -lrt /
+                echo "pwd:"
+                echo
+                pwd
+                echo
+                echo "list dirs from root location"
+                echo
+                ls -lrt /
                 
       - name: Upload checkov scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
