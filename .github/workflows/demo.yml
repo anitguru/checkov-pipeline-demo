@@ -1,74 +1,30 @@
-name: checkov
+# https://github.com/bridgecrewio/checkov-action/blob/master/README.md
 
-on:
-  push:
-    branches: [ master ] 
-  pull_request:
-    branches: [ master ]
+on: [push]
+
 env:
-  CONTAINER_VERSION: 1.1
-    
+  IMAGE_NAME: ${{ github.repository }}:${{ github.sha }}
+  IMAGE_PATH: .
+
 jobs:
-  build_push_deploy:
-    runs-on: ubuntu-20.04
+  checkov-image-scan:
+    runs-on: ubuntu-latest
+    name: checkov-image-scan
     steps:
-      - name: Checkout repository # Required to mount the Github Workspace to a volume
-        uses: actions/checkout@v3
-        #uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@master
 
-      - name: Scan the Dockerfile (fail if vuln criteria is met)
-        uses: addnab/docker-run-action@v3
+      - name: Build the image
+        run: docker build -t ${{ env.IMAGE_NAME }} ${{ env.IMAGE_PATH }}
+
+      - name: Run Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
         with:
-            image: bridgecrew/checkov:latest
-            options: |
-              -v ${{ github.workspace }}/Dockerfile:/Dockerfile
-            run: |
-              sh -c "checkov -d . --framework dockerfile --soft-fail -o sarif"
-              echo "Working DIR:"
-              pwd
-              echo
-              echo "test" > bob.sarif
-              echo "list files & dirs starting from root location:"
-              ls -lrt /
-              echo "Cat files:"
-              cat *.sarif
-              ls -lrt /github/workspace
-
-      - name: Checking for files
-        run: |
-          echo "Working DIR:"
-          echo
-          pwd
-          ls -lrt /home/runner/work/checkov-pipeline-demo/checkov-pipeline-demo
-          ls -lrt /
-          ls -lrt /github/workspace
-          echo
-          #cat /work/results.sarif
-                
-      - name: Upload checkov scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
-        
-        # Results are generated only on a success or failure
-        # this is required since GitHub by default won't run the next step
-        # when the previous one has failed. Security checks that do not pass will 'fail'.
-        # An alternative is to add `continue-on-error: true` to the previous step
-        # Or 'soft_fail: true' to checkov.
-        if: success() || failure()
-        with:
-          sarif_file: '/github/workspace/results.sarif'
-
-      - name: Build an image from the Dockerfile
-        run: |
-          docker build -t docker.io/svagml/checkovdemo:{{ env.CONTAINER_VERSION }} .
-        
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-        
-      - name: Push an image to Docker Hub
-        run: |
-          docker push docker.io/svagml/checkovdemo:1.0
-
-
+          quiet: true # optional: display only failed checks
+          soft_fail: true # optional: do not return an error code if there are failed checks
+          log_level: DEBUG # optional: set log level. Default WARNING
+          docker_image: ${{ env.IMAGE_NAME }} # define the name of the image to scan
+          dockerfile_path: ${{ format('{0}/Dockerfile', env.IMAGE_PATH) }} # path to the Dockerfile
+          container_user: 1000 # optional: Define what UID and / or what GID to run the container under to prevent permission issues
+          #api-key: ${{ secrets.BC_API_KEY }} # Bridgecrew API key stored as a GitHub secret
