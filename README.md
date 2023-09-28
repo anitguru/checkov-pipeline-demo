@@ -1,3 +1,5 @@
+[![Maintained by An IT Guru](https://img.shields.io/badge/maintained_by-anit.guru-blue%20)
+
 # Checkov Pipeline Demo 
 
 The purpose of this repository is to easily demonstrate how `checkov` can be used in a CI pipeline, we are using GitHub actions here.
