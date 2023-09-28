@@ -1,4 +1,4 @@
-![Maintained by An IT Guru](https://img.shields.io/badge/maintained_by-anit.guru-blue%20)
+[![Maintained by An IT Guru](https://img.shields.io/badge/maintained_by-anit.guru-blue%20)](https://anit.guru)
 
 # Checkov Pipeline Demo 
 
