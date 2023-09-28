@@ -53,4 +53,4 @@ jobs:
         
       - name: Push an image to Docker Hub
         run: |
-          docker push {{ env.CONTAINER_REGISTRY_URI }}:{{ env.CONTAINER_VERSION }}
+          docker push docker.io/svagml/checkovdemo:1.2
