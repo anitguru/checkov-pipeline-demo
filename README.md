@@ -13,7 +13,7 @@ The purpose of this repository is to easily demonstrate how `checkov` can be use
 
 * Create a new release in this repository using the CLI or UI or trigger a build manually
 * Go to Actions and review the CI process
-* Show the output of `bridgecrew`
+* Show the output of `checkov`
 * Visit the Security tab to demonstrate interoperability for the findings
 * Clean up - delete the release created and associated tags if used
   
