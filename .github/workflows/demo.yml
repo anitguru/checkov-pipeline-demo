@@ -13,7 +13,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository # Required to mount the Github Workspace to a volume
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        #uses: actions/checkout@v2
 
       - name: Scan the Dockerfile (fail if vuln criteria is met)
         uses: addnab/docker-run-action@v3
@@ -44,6 +45,13 @@ jobs:
                 
       - name: Upload checkov scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
+        
+        # Results are generated only on a success or failure
+        # this is required since GitHub by default won't run the next step
+        # when the previous one has failed. Security checks that do not pass will 'fail'.
+        # An alternative is to add `continue-on-error: true` to the previous step
+        # Or 'soft_fail: true' to checkov.
+        if: success() || failure()
         with:
           sarif_file: 'results.sarif'
 
