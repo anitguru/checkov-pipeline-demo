@@ -18,9 +18,6 @@ jobs:
       - name: Build the image
         run: |
           docker build -t ${{ env.IMAGE_NAME }} ${{ env.IMAGE_PATH }}
-          pwd
-          ls -lrta
-          #rm ~/.bridgecrew/credentials
 
       - name: Run Checkov action
         id: checkov
