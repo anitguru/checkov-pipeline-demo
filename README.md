@@ -20,4 +20,4 @@ The purpose of this repository is to easily demonstrate how `checkov` can be use
 
 ## Reference: https://github.com/bridgecrewio/checkov-action
 
-checkov can be added at different phases of a build.  Currently configured, it scans the Dockerfile warn (soft-fail) before the build if doesn't meet scanning security requirements.  Alternatively, it can stop the build when the soft-fail option is removed.  Scan results echo to console within the runner and the findings are published to the Github Security tab _(https://github.com/anitguru/checkov-pipeline-demo/security/code-scanning)_.
+Checkov can be added at the build or deploy phases of the application lifecycle.  Currently configured, it scans the Dockerfile and will soft-fail (warn) before the build if doesn't meet scanning security requirements.  Alternatively, it can stop **hard-fail** (stop) the build when the soft-fail option is removed.  Scan results echo to console within the runner and the findings are published to the Github Security tab _(https://github.com/anitguru/checkov-pipeline-demo/security/code-scanning)_.
