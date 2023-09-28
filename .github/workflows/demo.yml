@@ -32,6 +32,7 @@ jobs:
               ls -lrt /
               echo "Cat files:"
               cat *.sarif
+              ls -lrt /github/workspace
 
       - name: Checking for files
         run: |
@@ -40,6 +41,7 @@ jobs:
           pwd
           ls -lrt /home/runner/work/checkov-pipeline-demo/checkov-pipeline-demo
           ls -lrt /
+          ls -lrt /github/workspace
           echo
           #cat /work/results.sarif
                 
@@ -53,7 +55,7 @@ jobs:
         # Or 'soft_fail: true' to checkov.
         if: success() || failure()
         with:
-          sarif_file: 'results.sarif'
+          sarif_file: '/github/workspace/results.sarif'
 
       - name: Build an image from the Dockerfile
         run: |
