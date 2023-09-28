@@ -4,8 +4,10 @@ name: checkov
 on: [push]
 
 env:
+  CONTAINER_VERSION: 1.2
   IMAGE_NAME: ${{ github.repository }}:${{ github.sha }}
   IMAGE_PATH: .
+  CONTAINER_REGISTRY_URI: docker.io/svagml/checkovdemo
 
 jobs:
   checkov-image-scan:
@@ -14,10 +16,6 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@master
-
-      - name: Build the image
-        run: |
-          docker build -t ${{ env.IMAGE_NAME }} ${{ env.IMAGE_PATH }}
 
       - name: Run Checkov action
         id: checkov
@@ -41,3 +39,17 @@ jobs:
         if: success() || failure()
         with:
           sarif_file: results.sarif
+
+      - name: Build the image after checkov scans the Dockerfile
+        run: |
+          docker build -t {{ env.CONTAINER_REGISTRY_URI }}:{{ env.CONTAINER_VERSION }} .
+        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        
+      - name: Push an image to Docker Hub
+        run: |
+          docker push {{ env.CONTAINER_REGISTRY_URI }}:{{ env.CONTAINER_VERSION }}
