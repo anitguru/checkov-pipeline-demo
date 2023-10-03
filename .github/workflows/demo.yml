@@ -4,11 +4,13 @@ name: checkov
 on: [push]
 
 env:
-  CONTAINER_VERSION: 1.2
   IMAGE_NAME: ${{ github.repository }}:${{ github.sha }}
   IMAGE_PATH: .
   REGISTRY_URL: docker.io
-  CONTAINER_REGISTRY_URI: docker.io/svagml/checkovdemo
+  #CONTAINER_REGISTRY_URI: docker.io/svagml/checkovdemo
+  USER_NAME: svagml
+  REPO_NAME: checkovdemo
+  TAG_NAME: 1.2
 
 jobs:
   checkov-image-scan:
@@ -44,7 +46,7 @@ jobs:
 
       - name: Build the image after checkov scans the Dockerfile
         run: |
-          docker build -t ${{ env.REGISTRY_URL }}/svagml/checkovdemo:1.2 .
+          docker build -t ${{ env.REGISTRY_URL }}/{{ env.USER_NAME }}/{{ env.REPO_NAME }}:{{ env.TAG_NAME }} .
 
       - name: Login to Docker Hub
         uses: docker/login-action@v1
