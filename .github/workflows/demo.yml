@@ -43,7 +43,10 @@ jobs:
 
       - name: Build the image after checkov scans the Dockerfile
         run: |
-          docker build -t ${{ env.REGISTRY_URL }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.REPO_NAME }}:${{ env.TAG_NAME }} .
+          docker build \
+          -t ${{ env.REGISTRY_URL }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.REPO_NAME }}:${{ env.TAG_NAME }} \
+          -t ${{ env.REGISTRY_URL }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.REPO_NAME }}:latest \
+          .
 
       - name: Login to Docker Hub
         uses: docker/login-action@v1
@@ -53,4 +56,5 @@ jobs:
         
       - name: Push an image to Docker Hub
         run: |
-          docker push ${{ env.REGISTRY_URL }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.REPO_NAME }}:${{ env.TAG_NAME }}
+          docker push \
+          ${{ env.REGISTRY_URL }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.REPO_NAME }}:${{ env.TAG_NAME }}
