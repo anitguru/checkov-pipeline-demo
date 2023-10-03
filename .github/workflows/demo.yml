@@ -57,4 +57,5 @@ jobs:
       - name: Push an image to Docker Hub
         run: |
           docker push \
-          ${{ env.REGISTRY_URL }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.REPO_NAME }}:${{ env.TAG_NAME }}
+          --all-tags \
+          ${{ env.REGISTRY_URL }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.REPO_NAME }}
