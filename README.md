@@ -26,6 +26,6 @@ Checkov can be added at the build or deploy phases of the application lifecycle.
 
 ## Shifting Further Left with Microsoft VS Code Plugin for Checkov
 
-## Reference: https://marketplace.visualstudio.com/items?itemName=Bridgecrew.checkov
+* https://marketplace.visualstudio.com/items?itemName=Bridgecrew.checkov
 
 https://github.com/anitguru/checkov-pipeline-demo/assets/93944901/14202345-6f85-4699-b0b8-116a81f1be7a
