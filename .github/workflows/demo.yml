@@ -1,4 +1,5 @@
 # https://github.com/bridgecrewio/checkov-action/blob/master/README.md
+
 name: checkov
 
 on: [push]
