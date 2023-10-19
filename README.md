@@ -26,4 +26,4 @@ Checkov can be added at the build or deploy phases of the application lifecycle.
 
 * https://marketplace.visualstudio.com/items?itemName=Bridgecrew.checkov
 
-https://github.com/anitguru/checkov-pipeline-demo/assets/93944901/3921e040-5b6a-4c45-96e3-9ab75596436d
+https://github.com/anitguru/checkov-pipeline-demo/assets/93944901/14202345-6f85-4699-b0b8-116a81f1be7a
