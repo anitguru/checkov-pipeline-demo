@@ -6,7 +6,7 @@ The purpose of this repository is to easily demonstrate how `checkov` can be use
 
 
 ## Setup:
-* Create Action Secrets for `DOCKER_HUB_ACCESS_TOKEN` and `DOCKER_HUB_USERNAME`
+* Create Action Secrets for `DOCKER_HUB_ACCESS_TOKEN` , `DOCKER_HUB_USERNAME` and `REPO_NAME`
 
 
 ## Demo Steps:
