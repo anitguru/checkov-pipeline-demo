@@ -5,7 +5,7 @@ LABEL maintainer="Steve VanAllen <steve@vanallen.family>"
 LABEL description="This example Dockerfile installs apache."
 #COPY ./public-html/ /usr/local/apache2/htdocs/
 #RUN echo "Hello World" > /usr/local/apache2/htdocs/index.html
-RUN <<-"EOF"
+RUN <<-EOF
 	set -x
 	echo "do some things" > /usr/local/apache2/htdocs/index.html \n
 	echo "do more things" >> /usr/local/apache2/htdocs/index.html \n
