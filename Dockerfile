@@ -12,7 +12,7 @@ RUN bash -c 'cat > /usr/local/apache2/htdocs/index.html' <<EOL
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Varonis ASCII</title>
+    <title>An IT Guru ASCII</title>
 </head>
 <body style="font-family: monospace; text-align: center; background-color: #f9f9f9; padding-top: 50px;">
     <pre>
