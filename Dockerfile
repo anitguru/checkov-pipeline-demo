@@ -7,9 +7,9 @@ LABEL description="This example Dockerfile installs apache."
 #RUN echo "Hello World" > /usr/local/apache2/htdocs/index.html
 RUN <<-EOF
 	set -x
-	echo "do some things" > /usr/local/apache2/htdocs/index.html \n
-	echo "do more things" >> /usr/local/apache2/htdocs/index.html \n
-	echo "do more things" >> /usr/local/apache2/htdocs/index.html
+	echo -e "do some things" > /usr/local/apache2/htdocs/index.html \n
+	echo -e "do more things" >> /usr/local/apache2/htdocs/index.html \n
+	echo -e "do more things" >> /usr/local/apache2/htdocs/index.html
 EOF
 # The compliance framework that typically includes the requirement for
 # containers to run as a non-root user is the Center for Internet Security (CIS) Docker Benchmark
