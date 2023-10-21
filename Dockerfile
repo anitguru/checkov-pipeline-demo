@@ -40,6 +40,9 @@ RUN bash -c 'cat > /usr/local/apache2/htdocs/index.html' <<EOL
 </html>
 EOL
 
+# Modify the directory permissions to allow access for www-data
+RUN chown -R www-data:www-data htdocs logs
+
 # Start apache in the foreground
 CMD ["httpd-foreground"]
 
