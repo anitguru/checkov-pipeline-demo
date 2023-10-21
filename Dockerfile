@@ -2,18 +2,18 @@
 FROM httpd:2.4
 
 # Metadata as described by the label schema convention
-LABEL maintainer="Steve VanAllen <steve@vanallen.family>" \
-      description="This example Dockerfile installs apache."
-
-#ARG USR=www-data
-ARG USR=
+LABEL org.label-schema.maintainer="Steve VanAllen <steve@vanallen.family>" \
+      org.label-schema.description="This example Dockerfile installs apache." \
+      org.label-schema.schema-version="1.0"
 
 # Set the working directory
 WORKDIR /usr/local/apache2
 
-# Modify permissions to run as non-root user and add content
-RUN chown -R www-data:www-data htdocs logs && \
-    echo "ServerName localhost" >> /usr/local/apache2/conf/httpd.conf && \
+# Modify permissions to run as non-root user
+RUN chown -R www-data:www-data htdocs logs
+
+# Add ServerName directive to suppress warning and add content
+RUN echo "ServerName localhost" >> /usr/local/apache2/conf/httpd.conf && \
     bash -c 'cat > /usr/local/apache2/htdocs/index.html' <<EOL
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +37,7 @@ RUN chown -R www-data:www-data htdocs logs && \
 EOL
 
 # Switch to non-root user for remaining operations
-USER ${USR}
+USER www-data
 
 # Start apache in the foreground
 CMD ["httpd-foreground"]
