@@ -11,7 +11,7 @@ WORKDIR /usr/local/apache2
 # Modify permissions to run as non-root user and add content
 RUN chown -R www-data:www-data htdocs logs && \
     # Set ServerName to suppress the AH00558 warning
-    echo "ServerName localhost" >> /usr/local/apache2/conf/httpd.conf \
+    echo "ServerAlias localhost" >> /usr/local/apache2/conf/httpd.conf \
     bash -c 'cat > /usr/local/apache2/htdocs/index.html' <<EOL
 <!DOCTYPE html>
 <html lang="en">
