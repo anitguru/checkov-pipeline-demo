@@ -5,7 +5,8 @@ FROM httpd:2.4
 LABEL maintainer="Steve VanAllen <steve@vanallen.family>" \
       description="This example Dockerfile installs apache."
 
-ARG USR=www-data
+#ARG USR=www-data
+ARG USR=
 
 # Set the working directory
 WORKDIR /usr/local/apache2
