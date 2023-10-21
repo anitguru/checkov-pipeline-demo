@@ -11,13 +11,19 @@ RUN bash -c 'cat > /usr/local/apache2/htdocs/index.html' <<EOL
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Apache</title>
+    <title>Varonis ASCII</title>
 </head>
-<body>
-    <h1>Hello from Apache in An IT Guru's Docker!</h1>
-    <p>This is a multi-line HTML file.</p>
+<body style="font-family: monospace; text-align: center; background-color: #f9f9f9; padding-top: 50px;">
+    <pre>
+  ##     ###  ##             ####   #### ##            ## ##   ##  ###  ### ##   ##  ###  
+   ##      ## ##              ##    # ## ##           ##   ##  ##   ##   ##  ##  ##   ##  
+ ## ##    # ## #              ##      ##              ##       ##   ##   ##  ##  ##   ##  
+ ##  ##   ## ##               ##      ##              ##  ###  ##   ##   ## ##   ##   ##  
+ ## ###   ##  ##              ##      ##              ##   ##  ##   ##   ## ##   ##   ##  
+ ##  ##   ##  ##              ##      ##              ##   ##  ##   ##   ##  ##  ##   ##  
+###  ##  ###  ##             ####    ####              ## ##    ## ##   #### ##   ## ##   
+    </pre>
 </body>
 </html>
 EOL
