@@ -3,6 +3,7 @@
 FROM httpd:2.4
 LABEL maintainer="Steve VanAllen <steve@vanallen.family>"
 LABEL description="This example Dockerfile installs apache."
+USER _apt
 #COPY ./public-html/ /usr/local/apache2/htdocs/
 #RUN echo "Hello World" > /usr/local/apache2/htdocs/index.html
 # Add a multi-line index.html to the apache root directory
