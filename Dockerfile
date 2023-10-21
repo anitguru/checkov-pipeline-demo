@@ -1,11 +1,22 @@
 # checkov reference: https://www.checkov.io/7.Scan%20Examples/Dockerfile.html
 # httpd reference: https://www.docker.com/blog/how-to-use-the-apache-httpd-docker-official-image/
+# The compliance framework that typically includes the requirement for
+# containers to run as a non-root user is the Center for Internet Security (CIS) Docker Benchmark
+
 FROM httpd:2.4
+
 LABEL maintainer="Steve VanAllen <steve@vanallen.family>"
 LABEL description="This example Dockerfile installs apache."
-USER _apt
-#COPY ./public-html/ /usr/local/apache2/htdocs/
-#RUN echo "Hello World" > /usr/local/apache2/htdocs/index.html
+
+# Set the working directory
+WORKDIR /usr/local/apache2
+
+# Modify the directory permissions to allow access for www-data
+RUN chown -R www-data:www-data htdocs
+
+# Use the non-root user for execution
+USER www-data
+
 # Add a multi-line index.html to the apache root directory
 RUN bash -c 'cat > /usr/local/apache2/htdocs/index.html' <<EOL
 <!DOCTYPE html>
@@ -28,6 +39,8 @@ RUN bash -c 'cat > /usr/local/apache2/htdocs/index.html' <<EOL
 </body>
 </html>
 EOL
-# The compliance framework that typically includes the requirement for
-# containers to run as a non-root user is the Center for Internet Security (CIS) Docker Benchmark
+
+# Start apache in the foreground
+CMD ["httpd-foreground"]
+
 HEALTHCHECK CMD curl --fail http://localhost:8080 || exit 1
