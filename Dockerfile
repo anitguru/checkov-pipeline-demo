@@ -5,6 +5,8 @@ FROM httpd:2.4
 LABEL maintainer="Steve VanAllen <steve@vanallen.family>" \
       description="This example Dockerfile installs apache."
 
+ARG USR=www-data
+
 # Set the working directory
 WORKDIR /usr/local/apache2
 
@@ -34,7 +36,7 @@ RUN chown -R www-data:www-data htdocs logs && \
 EOL
 
 # Switch to non-root user for remaining operations
-USER www-data
+USER ${USR}
 
 # Start apache in the foreground
 CMD ["httpd-foreground"]
