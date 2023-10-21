@@ -14,9 +14,6 @@ WORKDIR /usr/local/apache2
 # Modify the directory permissions to allow access for www-data
 RUN chown -R www-data:www-data htdocs
 
-# Use the non-root user for execution
-USER www-data
-
 # Add a multi-line index.html to the apache root directory
 RUN bash -c 'cat > /usr/local/apache2/htdocs/index.html' <<EOL
 <!DOCTYPE html>
@@ -40,8 +37,12 @@ RUN bash -c 'cat > /usr/local/apache2/htdocs/index.html' <<EOL
 </html>
 EOL
 
-# Modify the directory permissions to allow access for www-data
-RUN chown -R www-data:www-data htdocs logs
+# Modify the directory permissions to allow access for www-data, this time as root
+RUN chown -R www-data:www-data htdocs && \
+    chown -R www-data:www-data logs/
+
+# Switch to the non-root user for the remaining operations
+USER www-data
 
 # Start apache in the foreground
 CMD ["httpd-foreground"]
