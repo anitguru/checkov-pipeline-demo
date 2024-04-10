@@ -2,9 +2,9 @@
 FROM httpd:2.4
 
 # Metadata as described by the label schema convention
-LABEL org.label-schema.maintainer="Steve VanAllen <steve@vanallen.family>" \
-      org.label-schema.description="This example Dockerfile installs apache." \
-      org.label-schema.schema-version="1.0"
+LABEL maintainer="Steve VanAllen <steve@vanallen.family>"
+LABEL description="This example Dockerfile installs node."
+MAINTAINER Steve VanAllen <steve@vanallen.family>
 
 # Set the working directory
 WORKDIR /usr/local/apache2
